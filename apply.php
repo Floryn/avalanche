@@ -1,6 +1,7 @@
 <?php
 require_once("../../class2.php");
 require_once(HEADERF);
+include_once(e_PLUGIN.'avalanche/languages/'.e_LANGUAGE.'.php');      //added by Floryn for e_NOTIFY   
 include_once(e_HANDLER."secure_img_handler.php");
 
 global $captcha;
@@ -164,6 +165,11 @@ if(check_class($pref['avalanche_applyaccess'])){
 }else{
 	$ns->tablerender("Access Denied! :D", "<div style='text-align:center;'>You do not have the correct access to view this page.</div>");
 }
-	
+//added by Floryn for e_notify
+$cmessage = "<a href='".SITEURLBASE.e_PLUGIN_ABS."avalanche/review.php?id.".$app_id."' alt=''>".NT_LAN_AVA_7."</a>";
+$ip = $e107->getip();
+$edata_ava = array("cmessage" => $cmessage, "ip" => $ip);
+$e_event -> trigger("avalanche", $edata_ava);
+//added by Floryn for e_notify	
 require_once(FOOTERF);
 ?>
